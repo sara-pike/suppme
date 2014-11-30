@@ -11,7 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141117135320) do
+ActiveRecord::Schema.define(version: 20141130130619) do
+
+  create_table "product_suppliers", force: true do |t|
+    t.integer "product_id",                          null: false
+    t.integer "supplier_id",                         null: false
+    t.decimal "price",       precision: 6, scale: 2
+  end
 
   create_table "products", force: true do |t|
     t.string   "name"
@@ -19,17 +25,14 @@ ActiveRecord::Schema.define(version: 20141117135320) do
     t.decimal  "price"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "products_suppliers", id: false, force: true do |t|
-    t.integer "product_id",  null: false
-    t.integer "supplier_id", null: false
+    t.integer  "qty"
+    t.string   "unit"
   end
 
   create_table "suppliers", force: true do |t|
     t.string   "name"
     t.string   "address"
-    t.integer  "telno"
+    t.string   "telno"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
