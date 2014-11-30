@@ -1,29 +1,56 @@
-<%= form_for(@product) do |f| %>
-  <% if @product.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
-
-      <ul>
-      <% @product.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+<div class="product-new">
+  <%= form_for(@product) do |f| %>
+    <% if @product.errors.any? %>
+      <div id="error_explanation">
+        <h2>
+          <%= pluralize(@product.errors.count, "error") %>
+          prohibited this product from being saved:
+        </h2>
+        <ul>
+          <% @product.errors.full_messages.each do |message| %>
+            <li>
+              <%= message %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="field">
+      <%= f.label :name %>
+      <br/>
+      <%= f.text_field :name %>
+    </div>
+    <div class="field">
+      <%= f.label :description %>
+      <br/>
+      <%= f.text_area :description %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+    <div class="product-suppliers">
+      <p>Match existing suppliers to this product and enter its price:</p>
+      <%= f.nested_fields_for :product_suppliers, wrapper_tag: :div, wrapper_options: { class: 'supplier-match' } do |ps| %>
+        <%= ps.collection_select :supplier_id, Supplier.all, :id, :name, prompt: 'Choose supplier' %>
+        <%= ps.text_field :price %>
+        <%= ps.remove_nested_fields_link %>
       <% end %>
-      </ul>
+      <%= f.add_nested_fields_link :product_suppliers, 'Add existing supplier' %>
+      or
+      <a id="supplier-new-link" href='#'>
+        Create a new one
+      </a>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+  <div class="supplier-new">
+    <%= form_tag suppliers_path, method: :post do %>
+      <%= label_tag 'Name' %>
+      <%= text_field_tag 'supplier[name]' %><br />
+      <%= label_tag 'Address' %>
+      <%= text_area_tag 'supplier[address]' %><br />
+      <%= label_tag 'Telephone number' %>
+      <%= text_field_tag 'supplier[telno]' %><br />
+      <%= submit_tag 'Save' %>
+    <% end %>
   </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
-  </div>
-  <div class="field">
-    <%= f.label :price %><br>
-    <%= f.text_field :price %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>
