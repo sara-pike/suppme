@@ -1,5 +1,6 @@
 class Product < ActiveRecord::Base
   
-  
-  has_and_belongs_to_many :suppliers
+  has_many :product_suppliers
+  has_many :suppliers, through: :product_suppliers
+
 end
