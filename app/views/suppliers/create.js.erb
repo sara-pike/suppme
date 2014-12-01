@@ -1,0 +1,3 @@
+$('.supplier-new').hide();
+$('.add_nested_fields_link').click();
+$('.supplier-match select').last().append('<option value="<%= @supplier.id.to_s %>" selected="selected"><%= @supplier.name.to_s %></option>');

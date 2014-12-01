@@ -43,7 +43,7 @@
     </div>
   <% end %>
   <div class="supplier-new">
-    <%= form_tag suppliers_path, method: :post do %>
+    <%= form_tag suppliers_path, method: :post, remote: true do %>
       <%= label_tag 'Name' %>
       <%= text_field_tag 'supplier[name]' %><br />
       <%= label_tag 'Address' %>
