@@ -1,14 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Suppme</title>
+  <title>Supp.me | Fulfillment</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <%= favicon_link_tag 'favicon.gif' %>
 </head>
 <body>
 
+  <header>
+      <%= link_to "", root_path, {:class => 'suppme suppme-logo'} %>
+  </header>
+
 <%= yield %>
+
+  <footer>
+      <p>Welcome James</p>
+      <p>&copy; Supp.me | 2014</p>
+  </footer>
 
 </body>
 </html>
