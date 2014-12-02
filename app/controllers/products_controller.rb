@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
   # GET /products.json
   def index
     if params[:search]
-      @products = Product.where('name LIKE ?', "%#{params[:search]}%").includes(:product_suppliers).order('name').order('product_suppliers.price_product_supplier DESC')
+      @products = Product.where('name LIKE ?', "%#{params[:search]}%").includes(:product_suppliers).order('name').order('product_suppliers.price DESC')
     else
       @products = Product.includes(:product_suppliers).order('name').order('product_suppliers.price DESC')
     end 
